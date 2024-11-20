@@ -1,0 +1,9 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block main %}
+    <h1>Edit new Project</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+        <button class="btn btn-success">Edit project</button>
+    {{ form_end(form) }}
+{% endblock %}

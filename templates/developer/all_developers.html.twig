@@ -1,0 +1,52 @@
+{% extends 'layout/base.html.twig' %}
+{% block main %}
+    <h2>Все разработчики</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Post_dev</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Age</th>
+            <th scope="col"></th>
+            <th scope="col"><a class="btn btn-secondary" href="{{ path('app_developer_new') }}">Create new</a></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for developer in developers %}
+          <tr>
+            <td>{{ developer.id }}</td>
+            <td>{{ developer.name }}</td>
+            <td>{{ developer.postDev }}</td>
+            <td>{{ developer.email }}</td>
+            <td>{{ developer.phone }}</td>
+            <td>{{ developer.age }}</td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('app_developer_edit', {'id': developer.id}) }}">edit</a>
+            </td>
+            <td>
+              <form method="post" action="{{ path('app_developer_delete', {'id': developer.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ developer.id) }}">
+                  <button class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>  
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+{% block  leftPanelColor %}
+  <script>
+      var elem = document.getElementById('Developers');
+      elem.style.color = 'red'; 
+  </script>
+{% endblock %}
